@@ -20,10 +20,6 @@ services:
   migrator:
       image: migratx_migrator
       tty: true      
-      expose:
-        - "8000"    
-      ports:
-        - "8000:8000"
       networks:
         - netmain   
       depends_on:
