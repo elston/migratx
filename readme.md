@@ -136,6 +136,8 @@ Next
 ./manage.py db downgrade
 ```
 
+Helper for command:
+
 ```
 positional arguments:
   {shell,db,runserver}
