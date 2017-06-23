@@ -4,11 +4,6 @@ export DB_NAME = invoice
 export DB_USER = invoice
 export DB_PASSWORD = passinvoice
 # ..
-export PREFIX_OPERATOR = 2GS
-export OPERATOR = \u0417\u0410\u041e '\u0423\u0434\u043e\u0441\u0442\u043e\u0432\u0435\u0440\u044f\u044e\u0449\u0438\u0439 \u0426\u0435\u043d\u0442\u0440'
-
-
-
 
 
 
