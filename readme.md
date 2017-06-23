@@ -136,7 +136,7 @@ Next
 ./manage.py db downgrade
 ```
 
-Helper for command:
+Helper for command ```./manage.py --help```:
 
 ```
 positional arguments:
