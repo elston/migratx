@@ -3,7 +3,7 @@ version: '3'
 services:
 
   storage:
-    image: tsfersftx_storage
+    image: migratx_storage
     network_mode: "host"
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=true
@@ -15,7 +15,7 @@ services:
       - ../../images/storage/dev.sql:/docker-entrypoint-initdb.d/bootstrap.sql
 
   migrator:
-    image: tsfersftx_migrator
+    image: migratx_migrator
     network_mode: "host" 
     environment:
       - PROJECT=migrator
@@ -26,7 +26,7 @@ services:
       - ../../images/migrator/requirements/dev.txt:/tmp/requirements.txt
 
   synchro:
-    image: tsfersftx_synchro
+    image: migratx_synchro
     network_mode: "host" 
     environment:
       - PROJECT=synchro
@@ -37,7 +37,7 @@ services:
       - ../../images/synchro/requirements/dev.txt:/tmp/requirements.txt      
 
   tester:
-    image: tsfersftx_tester
+    image: migratx_tester
     network_mode: "host" 
     environment:
       - PROJECT=tester

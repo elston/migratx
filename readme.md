@@ -1,4 +1,4 @@
-tsfersftx
+migratx
 ========================
 
 Technology
@@ -62,20 +62,10 @@ make migrate_all
 To run any command inside the Django Docker container, simply prepend:
 
 ```
-make shell_mediatry
+make shell_synchro
 ```
 
-or
 
-```
-make shell_frontface
-```
-
-### Start the Docker containers
-
-```
-make up
-```
 
 This will start the containers in the background.
 
@@ -85,29 +75,17 @@ When you need finish all containers:
 make down
 ```
 
-### View the logs
+
+### View the images
 
 ```
-make log_storage
+make images
 ```
 
-or(and)
+### View the volumes
 
 ```
-make log_mediatry
-```
-
-or(and)
-
-```
-make log_frontface
-```
-
-
-### Rebuild Docker containers
-
-```
-make rebuild
+make volumes
 ```
 
 ### Clear untagged Docker containers
@@ -122,59 +100,35 @@ make clear
 make ps
 ```
 
-Lanch app
---------------------------------------------------------------------
 
-To lanch app open your browser on page with adrress ``localhost:8001``
-
-Test openssl
---------------------------------------------------------------------
-
-```
-make shell_mediatry
-
-openssl ciphers | tr ":" "\n" | grep GOST
-
-openssl version -a
-```
-
-
-Tests 
---------------------------------------------------------------------
-
-```
-make shell_mediatry
-
-workon mediatry
-
-cd /mediatry
-
-./manage.py test tests.test_authentication
-
-./manage.py test tests.test_partnerships
-
-./manage.py test tests.test_creating_docs
-```
-
-
-migration on db
+hand made migrations on db
 --------------------------------------------------------------------
 
 first
 
 ```
-./manage.py syncdb
-./manage.py migrate
+make shell_migrator
+workon migrator
+cd /migrator
 ```
 
 Next
 
 ```
-./manage.py schemamigration clients --auto
-./manage.py migrate clients
+1.
+# ./manage.py db init   
+
+2.
+# ./manage.py db revision --autogenerate -m "initial"
+
+3.
+# ./manage.py db upgrade
+
+4.
+# ./manage.py db downgrade
 ```
 
-
+```
 positional arguments:
   {shell,db,runserver}
     shell               Runs a Python shell inside Flask application context.
@@ -200,14 +154,4 @@ positional arguments:
     history             List changeset scripts in chronological order.
     revision            Create a new revision file.
 
-1.
-# ./manage.py db init   
-
-2.
-# ./manage.py db revision --autogenerate -m "initial"
-
-3.
-# ./manage.py db upgrade
-
-4.
-# ./manage.py db downgrade
+```

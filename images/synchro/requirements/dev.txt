@@ -1,0 +1,6 @@
+ipdb
+Jinja2
+lxml
+MySQL-python
+pyOpenSSL
+Twisted

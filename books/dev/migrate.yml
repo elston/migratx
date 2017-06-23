@@ -3,7 +3,7 @@ version: '3'
 services:
 
   storage:
-    image: tsfersftx_storage
+    image: migratx_storage
     expose:
       - "3306"    
     ports:
@@ -16,7 +16,7 @@ services:
       - var_log_mysql:/var/log/mysql     
 
   migrator:
-    image: tsfersftx_migrator
+    image: migratx_migrator
     tty: true
     networks:
       - netmain

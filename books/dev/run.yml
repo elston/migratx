@@ -18,7 +18,7 @@ services:
       # restart: always
 
   migrator:
-      image: tsfersftx_migrator
+      image: migratx_migrator
       tty: true      
       expose:
         - "8000"    
@@ -44,7 +44,7 @@ services:
       command: /bin/bash
 
   synchro:
-      image: tsfersftx_synchro
+      image: migratx_synchro
       tty: true      
       expose:
         - "8888"    
@@ -74,7 +74,7 @@ services:
       # restart: always            
 
   tester:
-      image: tsfersftx_tester
+      image: migratx_tester
       tty: true      
       networks:
         - netmain   

@@ -1,13 +1,12 @@
-PROJECT = tsfersftx
-
+PROJECT = migratx
+# ..
 export DB_NAME = invoice
 export DB_USER = invoice
 export DB_PASSWORD = passinvoice
-
+# ..
 export PREFIX_OPERATOR = 2GS
-# ЗАО 'Удостоверяющий Центр'
 export OPERATOR = \u0417\u0410\u041e '\u0423\u0434\u043e\u0441\u0442\u043e\u0432\u0435\u0440\u044f\u044e\u0449\u0438\u0439 \u0426\u0435\u043d\u0442\u0440'
-# export OPERATOR = $(shell echo ваыв|iconv -f utf8 -t UNICODE)
+
 
 
 
@@ -182,11 +181,6 @@ db_test:
 		mysql -h 127.0.0.1 -P 3306 -u invoice -p invoice
 	@#...passinvoice
 
-	@echo '===> test webinvoice ...'
-	@echo "\s" | \
-		mysql -h 127.0.0.1 -P 3306 -u webinvoice -p webinvoice
-	@#...datapass
-
 
 # target: db_load - load data to storage container
 .PHONY: db_load
@@ -197,11 +191,6 @@ db_load:
 	@echo '      loaded'
 	@#...passinvoice
 
-	@echo '===> load webinvoice ...'
-	@gunzip -c ../../data/webinvoice.gz | \
-		mysql -h 127.0.0.1 -P 3306 -u webinvoice -p webinvoice
-	@echo '      loaded'
-	@#...datapass
 
 # target: db_dump - dump data from storage container
 .PHONY: db_dump
@@ -211,10 +200,6 @@ db_dump:
 	@echo '      dumped'
 	@#...passinvoice
 
-	@echo '===> dump webinvoice ...'
-	@mysqldump -h 127.0.0.1 -P 3306 -u webinvoice -p webinvoice | gzip > ../../data/webinvoice.gz
-	@echo '      dumped'
-	@#...datapass	
 
 
 # target:

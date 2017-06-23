@@ -3,7 +3,7 @@ version: '3'
 services:
 
   storage:
-    image: tsfersftx_storage
+    image: migratx_storage
     expose:
       - "3306"    
     ports:
