@@ -132,7 +132,7 @@ Next
 
 4.
 
-````
+```
 ./manage.py db downgrade
 ```
 
