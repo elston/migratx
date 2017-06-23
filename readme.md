@@ -64,10 +64,8 @@ To run any command inside the Django Docker container, simply prepend:
 ```
 make shell_synchro
 ```
+This will start the containers in the debug mode.
 
-
-
-This will start the containers in the background.
 
 When you need finish all containers:
 
@@ -114,18 +112,28 @@ cd /migrator
 
 Next
 
-```
 1.
-# ./manage.py db init   
+
+```
+./manage.py db init   
+```
 
 2.
-# ./manage.py db revision --autogenerate -m "initial"
+
+```
+./manage.py db revision --autogenerate -m "initial"
+```
 
 3.
-# ./manage.py db upgrade
+
+```
+./manage.py db upgrade
+```
 
 4.
-# ./manage.py db downgrade
+
+````
+./manage.py db downgrade
 ```
 
 ```
