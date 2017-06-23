@@ -145,7 +145,11 @@ positional arguments:
     db                  Perform database migrations
     runserver           Runs the Flask development server i.e. app.run()
 
+```
 
+Helper for command ```./manage.py db --help```:
+
+```
 positional arguments:
   {upgrade,heads,merge,migrate,stamp,show,current,edit,init,downgrade,branches,history,revision}
     upgrade             Upgrade to a later version
