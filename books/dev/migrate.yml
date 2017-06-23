@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  storage:
+    image: tsfersftx_storage
+    expose:
+      - "3306"    
+    ports:
+      - "3306:3306"
+    networks:
+      - netmain
+    volumes:
+      - var_lib_mysql:/var/lib/mysql
+      - etc_mysql:/etc/mysql
+      - var_log_mysql:/var/log/mysql     
+
+  migrator:
+    image: tsfersftx_migrator
+    tty: true
+    networks:
+      - netmain
+    depends_on:
+      - storage
+    environment:
+      - PROJECT=migrator      
+      - WORKON_HOME=/migrator/.env         
+      - FLASK_CONFIGURATION=dev
+      # ..
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_URL=storage     
+    volumes:
+      - ../../images/migrator/src:/migrator
+      - ../../images/migrator/migrate.sh:/usr/local/bin/migrate.sh
+    # .............................................        
+    command: /usr/local/bin/migrate.sh
+
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:              
+
+networks:
+  netmain:
+    driver: bridge  

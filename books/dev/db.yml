@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  storage:
+    image: tsfersftx_storage
+    expose:
+      - "3306"    
+    ports:
+      - "3306:3306"
+    networks:
+      - netmain
+    volumes:
+      - var_lib_mysql:/var/lib/mysql
+      - etc_mysql:/etc/mysql
+      - var_log_mysql:/var/log/mysql        
+
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:
+
+networks:
+  netmain:
+    driver: bridge
+   

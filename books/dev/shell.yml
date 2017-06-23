@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  tester:
+      external_links:
+        - tsfersftx_synchro_1:synchro
+      command: /bin/bash        
+
+
+   

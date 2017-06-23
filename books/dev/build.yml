@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+
+  storage:
+    build:
+      context: ../../images/storage
+      dockerfile: dev.dockerfile
+    network_mode: "host" 
+    volumes:
+      - var_lib_mysql:/var/lib/mysql
+      - etc_mysql:/etc/mysql
+      - var_log_mysql:/var/log/mysql        
+
+
+  migrator:
+    build:
+      context: ../../images/migrator
+      dockerfile: dev.dockerfile
+    network_mode: "host"  
+    environment:
+      - PROJECT=migrator
+      - WORKON_HOME=/migrator/.env 
+    volumes:
+      - ../../images/migrator/src:/migrator
+
+  synchro:
+    build:
+      context: ../../images/synchro
+      dockerfile: dev.dockerfile
+    network_mode: "host"  
+    environment:
+      - PROJECT=synchro
+      - WORKON_HOME=/synchro/.env 
+    volumes:
+      - ../../images/synchro/src:/synchro
+
+  tester:
+    build:
+      context: ../../images/tester
+      dockerfile: dev.dockerfile      
+    network_mode: "host"  
+    environment:
+      - PROJECT=tester
+      - WORKON_HOME=/tester/.env 
+    volumes:
+      - ../../images/tester/src:/tester      
+
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:

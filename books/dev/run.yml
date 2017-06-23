@@ -1,0 +1,98 @@
+version: '3'
+
+services:
+
+  storage:
+      image: mysql:5.7
+      expose:
+        - "3306"    
+      ports:
+        - "3306:3306"
+      networks:
+        - netmain
+      volumes:
+        - var_lib_mysql:/var/lib/mysql
+        - etc_mysql:/etc/mysql
+        - var_log_mysql:/var/log/mysql        
+      # .............................................
+      # restart: always
+
+  migrator:
+      image: tsfersftx_migrator
+      tty: true      
+      expose:
+        - "8000"    
+      ports:
+        - "8000:8000"
+      networks:
+        - netmain   
+      depends_on:
+        - storage
+      environment:
+        - PROJECT=migrator      
+        - WORKON_HOME=/migrator/.env         
+        - FLASK_CONFIGURATION=dev
+        # ..
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - DB_URL=storage
+      volumes:
+        - ../../images/migrator/src:/migrator
+        - ../../images/migrator/runserv.sh:/usr/local/bin/runserv.sh
+      # .............................................        
+      command: /bin/bash
+
+  synchro:
+      image: tsfersftx_synchro
+      tty: true      
+      expose:
+        - "8888"    
+      ports:
+        - "8888:8888"
+      networks:
+        - netmain   
+      depends_on:
+        - storage
+      environment:
+        - PROJECT=synchro      
+        - WORKON_HOME=/synchro/.env
+        # ...
+        - PREFIX_OPERATOR=${PREFIX_OPERATOR}
+        - OPERATOR=${OPERATOR}
+        # ..
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+      volumes:
+        - ../../images/synchro/src:/synchro
+        - ../../images/synchro/runserv.sh:/usr/local/bin/runserv.sh
+        # ..containers
+        - ../../images/synchro/src/.containers:/synchro/.containers
+              # .............................................        
+      command: /bin/bash
+      # restart: always            
+
+  tester:
+      image: tsfersftx_tester
+      tty: true      
+      networks:
+        - netmain   
+      environment:
+        - PROJECT=tester      
+        - WORKON_HOME=/tester/.env         
+        - API_URL=http://synchro:8000/api/v3/json
+      volumes:
+        - ../../images/tester/src:/tester
+      # .............................................        
+      command: /bin/bash
+
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:
+
+networks:
+  netmain:
+    driver: bridge
+   

@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+
+  storage:
+    image: tsfersftx_storage
+    network_mode: "host"
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+    volumes:
+      - var_lib_mysql:/var/lib/mysql
+      - etc_mysql:/etc/mysql
+      - var_log_mysql:/var/log/mysql     
+      # 
+      - ../../images/storage/dev.sql:/docker-entrypoint-initdb.d/bootstrap.sql
+
+  migrator:
+    image: tsfersftx_migrator
+    network_mode: "host" 
+    environment:
+      - PROJECT=migrator
+      - WORKON_HOME=/migrator/.env
+    volumes:
+      - ../../images/migrator/src:/migrator
+      - ../../images/migrator/bootstrap.sh:/usr/local/bin/bootstrap.sh
+      - ../../images/migrator/requirements/dev.txt:/tmp/requirements.txt
+
+  synchro:
+    image: tsfersftx_synchro
+    network_mode: "host" 
+    environment:
+      - PROJECT=synchro
+      - WORKON_HOME=/synchro/.env
+    volumes:
+      - ../../images/synchro/src:/synchro
+      - ../../images/synchro/bootstrap.sh:/usr/local/bin/bootstrap.sh
+      - ../../images/synchro/requirements/dev.txt:/tmp/requirements.txt      
+
+  tester:
+    image: tsfersftx_tester
+    network_mode: "host" 
+    environment:
+      - PROJECT=tester
+      - WORKON_HOME=/tester/.env
+    volumes:
+      - ../../images/tester/src:/tester
+      - ../../images/tester/bootstrap.sh:/usr/local/bin/bootstrap.sh
+      - ../../images/tester/requirements/dev.txt:/tmp/requirements.txt      
+
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:        
