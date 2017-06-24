@@ -74,7 +74,7 @@ make down
 ```
 
 
-### For all make commands
+### For help all make commands
 
 ```
 make help
