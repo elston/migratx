@@ -53,9 +53,6 @@ services:
       environment:
         - PROJECT=synchro      
         - WORKON_HOME=/synchro/.env
-        # ...
-        - PREFIX_OPERATOR=${PREFIX_OPERATOR}
-        - OPERATOR=${OPERATOR}
         # ..
         - DB_NAME=${DB_NAME}
         - DB_USER=${DB_USER}
