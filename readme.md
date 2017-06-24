@@ -74,6 +74,13 @@ make down
 ```
 
 
+### For all make commands
+
+```
+make help
+```
+
+
 ### View the images
 
 ```
