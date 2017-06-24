@@ -56,7 +56,7 @@ make down
 then migrate db
 
 ```
-make migrate_all
+make migrate_migrator
 ```
 
 To run any command inside the Django Docker container, simply prepend:
