@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-import logging
-from logging.handlers import RotatingFileHandler
 
-# ...
+
 class ImproperlyConfigured(Exception):
     pass
 
-# ...
+
 def get_env_variable(var_name, allow_none=False):
     try:
         return os.environ[var_name]
@@ -19,9 +17,8 @@ def get_env_variable(var_name, allow_none=False):
         return None
 
 
-
-
 class BaseConfig(object):
+
     # ...
     DEBUG = False
     TESTING = False
@@ -40,12 +37,11 @@ class BaseConfig(object):
     SQLALCHEMY_DATABASE_URI = (
         'mysql://{db_user}:{db_password}@{db_url}:3306/{db_name}'
         '?charset=utf8').format(
-            db_user = DB_USER,
-            db_password = DB_PASSWORD,
-            db_name = DB_NAME,
-            db_url = DB_URL
+            db_user=DB_USER,
+            db_password=DB_PASSWORD,
+            db_name=DB_NAME,
+            db_url=DB_URL
     )
-
 
 
 class DevConfig(BaseConfig):
