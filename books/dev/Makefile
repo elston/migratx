@@ -310,14 +310,6 @@ rmi:
 .PHONY: rmvol
 rmvol:
 	@docker volume rm `docker volume ls |grep $(PROJECT) |xargs -L1 | awk "{print $2}"`
-# ...
-# docker images |grep tsfersf |xargs -L1 | awk '{print $1}'
-# docker images |grep tsfersf
-
-# ...
-# docker volume ls |grep tsfersf |xargs -L1 | awk '{print $2}'
-# docker volume rm $(docker volume ls |grep tsfersf |xargs -L1 | awk '{print $2}')
-
 
 
 
