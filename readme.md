@@ -1,6 +1,8 @@
 migratx
 ========================
 
+Example of organised migration environment in docker platform
+
 Technology
 ----------------
 - Docker
