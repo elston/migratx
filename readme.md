@@ -7,7 +7,9 @@ Technology
 ----------------
 - Docker
 - Python 2.7
-- Twisted
+- SQLAlchemy
+- Alembic
+- Flask-Migrate
 - MySql 5.7
 - Virtualenv
 
