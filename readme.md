@@ -106,7 +106,7 @@ make ps
 ```
 
 
-hand made migrations
+Hand made migrations
 --------------------------------------------------------------------
 
 first
